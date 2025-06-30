@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accounts</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/accounts">Accounts</a></li>
+                <li><a href="/incomes">Incomes</a></li>
+                <li><a href="/expenses">Expenses</a></li>
+                <li><a href="/budget">Budget</a></li>
+                <li><a href="/logout">Log Out</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="accounts-container">
+        <h2>Manage Accounts</h2>
+        <div class="form-container">
+            <h3>Create Account</h3>
+            <form id="createAccountForm" action="/createAccount" method="POST">
+                <div class="form-group">
+                    <label for="accountType">Account Name:</label>
+                    <input type="text" id="accountType" name="accountType" required>
+                </div>
+                <button type="submit">Create Account</button>
+            </form>
+        </div>
+        <div class="form-container">
+            <h3>Delete Account</h3>
+            <form id="deleteAccountForm" action="/deleteAccount" method="POST">
+                <div class="form-group">
+                    <label for="deleteAccountType">Account Name:</label>
+                    <input type="text" id="deleteAccountType" name="deleteAccountType" required>
+                </div>
+                <button type="submit">Delete Account</button>
+            </form>
+        </div>
+        <div class="accounts-table">
+            <h3>Accounts</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Account Name</th>
+                        <th>Current Balance</th>
+                        <th>Total Expenses</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% accounts.forEach(account => { %>
+                    <tr>
+                        <td><%= account.account_type %></td>
+                        <td>$<%= account.balance %></td>
+                        <td>$<%= account.total_expenses %></td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

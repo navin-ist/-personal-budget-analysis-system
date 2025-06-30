@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incomes</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/accounts">Accounts</a></li>
+                <li><a href="/incomes">Incomes</a></li>
+                <li><a href="/expenses">Expenses</a></li>
+                <li><a href="/budget">Budget</a></li>
+                <li><a href="/logout">Log Out</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="incomes-container">
+        <h2>Track Income</h2>
+        <form id="incomeForm" action="/addIncome" method="POST">
+            <div class="form-group">
+                <label for="incomeDate">Date:</label>
+                <input type="date" id="incomeDate" name="incomeDate" required>
+            </div>
+            <div class="form-group">
+                <label for="accountType">Account Name:</label>
+                <select id="accountType" name="accountType" required>
+                    <% accounts.forEach(account => { %>
+                        <option value="<%= account.account_id %>"><%= account.account_type %></option>
+                    <% }) %>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="incomeSource">Source:</label>
+                <input type="text" id="incomeSource" name="incomeSource" required>
+            </div>
+            <div class="form-group">
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" name="amount" required>
+            </div>
+            <button type="submit">Add Income</button>
+            <button type="reset">Reset</button>
+        </form>
+    </div>
+</body>
+</html>

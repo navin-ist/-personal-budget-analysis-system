@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/accounts">Accounts</a></li>
+                <li><a href="/incomes">Incomes</a></li>
+                <li><a href="/expenses">Expenses</a></li>
+                <li><a href="/budget">Budget</a></li>
+                <li><a href="/logout">Log Out</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="budget-container">
+        <h2>Manage Budget</h2>
+        <div class="form-container">
+            <h3>Allocate Budget</h3>
+            <form id="allocateBudgetForm" action="/allocateBudget" method="POST">
+                <div class="form-group">
+                    <label for="expenseCategory">Expense Category:</label>
+                    <input type="text" id="expenseCategory" name="expenseCategory" required>
+                </div>
+                <div class="form-group">
+                    <label for="budgetAmount">Budget Amount:</label>
+                    <input type="number" id="budgetAmount" name="budgetAmount" required>
+                </div>
+                <button type="submit">Allocate Budget</button>
+            </form>
+        </div>
+        <div class="form-container">
+            <h3>Remove Budget</h3>
+            <form id="removeBudgetForm" action="/removeBudget" method="POST">
+                <div class="form-group">
+                    <label for="removeCategory">Expense Category:</label>
+                    <input type="text" id="removeCategory" name="removeCategory" required>
+                </div>
+                <button type="submit">Remove Budget</button>
+            </form>
+        </div>
+        <div class="budget-table">
+            <h3>Budgets</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Expense Category</th>
+                        <th>Budget Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% budgets.forEach(budget => { %>
+                    <tr>
+                        <td><%= budget.expense_category %></td>
+                        <td>$<%= budget.amount %></td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+        <% if (exceededBudgets.length > 0) { %>
+        <div class="exceeded-budgets">
+            <h3>Exceeded Budgets</h3>
+            <% exceededBudgets.forEach(exceeded => { %>
+            <p>Total Expenses in the <%= exceeded.expense_category %> exceeded the budget allotted for that.</p>
+            <% }) %>
+        </div>
+        <% } %>
+    </div>
+</body>
+</html>

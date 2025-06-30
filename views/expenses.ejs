@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expenses</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/accounts">Accounts</a></li>
+                <li><a href="/incomes">Incomes</a></li>
+                <li><a href="/expenses">Expenses</a></li>
+                <li><a href="/budget">Budget</a></li>
+                <li><a href="/logout">Log Out</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="expenses-container">
+        <h2>Track Expenses</h2>
+        <form id="expenseForm" action="/addExpense" method="POST">
+            <div class="form-group">
+                <label for="expenseDate">Date:</label>
+                <input type="date" id="expenseDate" name="expenseDate" required>
+            </div>
+            <div class="form-group">
+                <label for="accountType">Account Name:</label>
+                <select id="accountType" name="accountType" required>
+                    <% accounts.forEach(account => { %>
+                    <option value="<%= account.account_id %>"><%= account.account_type %></option>
+                    <% }) %>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="expenseCategory">Category:</label>
+                <input type="text" id="expenseCategory" name="expenseCategory" required>
+            </div>
+            <div class="form-group">
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" name="amount" required>
+            </div>
+            <div class="form-group">
+                <label for="remark">Remark:</label>
+                <input type="text" id="remark" name="remark">
+            </div>
+            <button type="submit">Add Expense</button>
+            <button type="reset">Reset</button>
+        </form>
+        <div class="expenses-table">
+            <h3>Expenses</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Account</th>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                        <th>Remark</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% expenses.forEach(expense => { %>
+                    <tr>
+                        <td><%= expense.account_type %></td>
+                        <td><%= expense.expense_category %></td>
+                        <td>$<%= expense.amount %></td>
+                        <td><%= expense.expense_date %></td>
+                        <td><%= expense.remark %></td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
